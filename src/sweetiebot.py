@@ -34,7 +34,8 @@ class SweetieBot(commands.Bot):
         print(f"Channel found: {channel}")  # Debugging line to check if the channel is found
         if channel:
             day_name = datetime.now().strftime('%A')
-            image_path: Path = Path(f"{base_path}{day_name}")
+            # Add an extra forward slash if on unix
+            image_path: Path = Path(f"{base_path}/{day_name}")
             print (f"Looking for images in: {image_path}")
             folders = [f for f in image_path.iterdir() if f.is_dir()]
             files = []
