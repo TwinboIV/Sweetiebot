@@ -8,7 +8,7 @@ from pathlib import Path
 
 load_dotenv()
 #intents.message_content = True
-TARGET_TIME = time(hour=23, minute=8, second=0)
+TARGET_TIME = time(hour=23, minute=10, second=0)
 base_path = "..\\res\\weekdays\\"
 last_images = {
     "Monday": "",
@@ -25,9 +25,10 @@ class SweetieBot(commands.Bot):
         print(f'Initializing SweetieBot.....')
         super().__init__(command_prefix=command_prefix, intents=intents)
 
-    #async def on_ready(self):
-    #    self.send_scheduled_message.start()
+    async def on_ready(self):
+        self.send_message.start()
 
+    @tasks.loop(time=TARGET_TIME)
     async def send_message(self, channel_id=os.getenv('DEFAULT_CHANNEL_ID')):
         channel = self.get_channel(channel_id)
         print(f"Channel found: {channel}")  # Debugging line to check if the channel is found
@@ -82,11 +83,6 @@ class SweetieBot(commands.Bot):
 intents = discord.Intents.default()
 intents.message_content = True
 sweetiebot = SweetieBot(command_prefix="!", intents=intents)
-
-@tasks.loop(time=TARGET_TIME)
-async def send_scheduled_message():
-    await sweetiebot.send_message(sweetiebot)
-send_scheduled_message.start()
 
 @sweetiebot.command()
 async def send(ctx):
