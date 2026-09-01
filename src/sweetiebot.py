@@ -8,7 +8,7 @@ from pathlib import Path
 
 load_dotenv()
 
-TARGET_TIME = time(hour=23, minute=38, second=0)
+TARGET_TIME = time(hour=23, minute=58, second=0)
 base_path = Path(os.getenv('FILE_DIRECTORY'))
 last_images = {
     "Monday": "",
@@ -66,8 +66,16 @@ class SweetieBot(commands.Bot):
             
             # Get the name of the containing folder
             folder_name = random_file.parent.name
+            # Replace any spaces in the folder name with hyphens
+            folder_name = folder_name.replace(" ", "-")
             # Get the day of the week in all lowercase letters
             day_of_week = datetime.now().strftime('%A').lower()
+
+            if folder_name.lower() in ["trixie", "startrix", "twixie"]:
+                folder_name = folder_name.upper()
+                day_of_week = day_of_week.upper()
+
+
             # Edit the name of the channel to include the folder name and day of the week
             new_channel_name = f"{folder_name}-{day_of_week}"
 
