@@ -7,8 +7,8 @@ import random
 from pathlib import Path
 
 load_dotenv()
-#intents.message_content = True
-TARGET_TIME = time(hour=23, minute=31, second=0)
+
+TARGET_TIME = time(hour=23, minute=33, second=0)
 base_path = Path(os.getenv('FILE_DIRECTORY'))
 last_images = {
     "Monday": "",
