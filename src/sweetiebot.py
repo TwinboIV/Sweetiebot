@@ -8,7 +8,7 @@ from pathlib import Path
 
 load_dotenv()
 #intents.message_content = True
-TARGET_TIME = time(hour=23, minute=17, second=0)
+TARGET_TIME = time(hour=23, minute=18, second=0)
 base_path = "..\\res\\weekdays\\"
 last_images = {
     "Monday": "",
