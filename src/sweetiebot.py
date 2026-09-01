@@ -8,7 +8,7 @@ from pathlib import Path
 
 load_dotenv()
 #intents.message_content = True
-TARGET_TIME = time(hour=6, minute=0, second=10)
+TARGET_TIME = time(hour=23, minute=5, second=0)
 base_path = "..\\res\\weekdays\\"
 last_images = {
     "Monday": "",
@@ -79,14 +79,13 @@ class SweetieBot(commands.Bot):
         else:
             print(f"Error: Could not find channel with ID {channel_id}")
 
-    @tasks.loop(time=TARGET_TIME)
-    async def send_scheduled_message(self):
-        # Replace with your specific Discord Channel ID (must be an integer)
-        await self.send_message()
-
 intents = discord.Intents.default()
 intents.message_content = True
 sweetiebot = SweetieBot(command_prefix="!", intents=intents)
+
+@tasks.loop(time=TARGET_TIME)
+async def send_scheduled_message():
+    await sweetiebot.send_message(sweetiebot)
 
 @sweetiebot.command()
 async def send(ctx):
