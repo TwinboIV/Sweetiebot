@@ -8,7 +8,7 @@ from pathlib import Path
 
 load_dotenv()
 #intents.message_content = True
-TARGET_TIME = time(hour=23, minute=23, second=0)
+TARGET_TIME = time(hour=23, minute=24, second=30)
 base_path = "..\\res\\weekdays\\"
 last_images = {
     "Monday": "",
@@ -30,7 +30,7 @@ class SweetieBot(commands.Bot):
 
     @tasks.loop(time=TARGET_TIME)
     async def send_message(self, channel_id=os.getenv('DEFAULT_CHANNEL_ID')):
-        channel = self.get_channel(channel_id)
+        channel = self.get_channel(channel_id.toint())
         print(f"Channel found: {channel}")  # Debugging line to check if the channel is found
         if channel:
             day_name = datetime.now().strftime('%A')
