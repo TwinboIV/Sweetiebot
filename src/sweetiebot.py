@@ -8,7 +8,7 @@ from pathlib import Path
 
 load_dotenv()
 #intents.message_content = True
-TARGET_TIME = time(hour=23, minute=13, second=0)
+TARGET_TIME = time(hour=23, minute=17, second=0)
 base_path = "..\\res\\weekdays\\"
 last_images = {
     "Monday": "",
@@ -26,7 +26,7 @@ class SweetieBot(commands.Bot):
         super().__init__(command_prefix=command_prefix, intents=intents)
 
     async def on_ready(self):
-        self.send_message.start()
+        self.send_message.start(self)
 
     @tasks.loop(time=TARGET_TIME)
     async def send_message(self, channel_id=os.getenv('DEFAULT_CHANNEL_ID')):
@@ -50,9 +50,6 @@ class SweetieBot(commands.Bot):
                 random_file = random.choice(files)
 
             last_images[day_name] = random_file.name
-
-            # Get the file name
-            file_name = random_file.name
 
             # Clear any previous bot messages
             async for message in channel.history(limit=150):
