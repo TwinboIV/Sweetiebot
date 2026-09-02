@@ -8,7 +8,7 @@ from pathlib import Path
 
 load_dotenv()
 
-TARGET_TIME = time(hour=0, minute=5, second=30)
+TARGET_TIME = time(hour=6, minute=0, second=10)
 base_path = Path(os.getenv('FILE_DIRECTORY'))
 last_images = {
     "Monday": "",
